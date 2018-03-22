@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Task Lists</h1>
+
+  <div *ngIf="tasks?.length > 0; else noTasks" class="card">
+    <div class="card-header">Tasks</div>
+    <div *ngFor="let task of tasks" class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item"><b>Title:</b><span [class.text-secondary]="task.isDone" [class.text-danger]="!task.isDone"> <b><i>{{task.title}}</i></b></span></li>
+        <!-- <li class="list-group-item"><b>Is Done:</b> {{task.isDone}}</li> -->
+        <div class="btn-group pull-right mt-2">
+          <a routerLink="/tasks/{{task._id}}" class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i>  Edit </a>
+          <a href="#" (click)="onDeleteClick(task._id)" class="btn btn-danger btn-sm ml-2">
+            <i class="fa fa-trash"></i> Delete</a>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <ng-template #noTasks>
+    <hr>
+    <h5>There are no Tasks in the system</h5>
+  </ng-template>
+</div>

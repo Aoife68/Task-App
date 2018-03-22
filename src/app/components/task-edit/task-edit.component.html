@@ -1,0 +1,39 @@
+<!--Set Back to Dashboard Link-->
+<div class="row">
+    <div class="col-md-6">
+      <a routerLink="/" class="btn btn-link">
+        <i class="fa fa-arrow-circle-o-left"></i> Back To Task List
+      </a>
+    </div>
+    <div class="col-md-6">
+      <!--Left Blank required to divide page, could add to if needed-->
+    </div>
+  </div>
+  
+  <!--Add Client Form-->
+  <div class="card">
+    <div class="card-header">
+     Edit Task
+    </div>
+    <div class="card-body">
+      <form #editTaskForm="ngForm" (ngSubmit)="onSubmit(editTaskForm)">
+        <div class="form-group">
+          <label for="title">{{title}}</label>
+          <input type="text" class="form-control" name="title" #taskTitle="ngModel" [ngClass]="{'is-invalid': taskTitle.errors && taskTitle.touched}"
+            [(ngModel)]="title" minlength="2" required>
+          <div [hidden]="!taskTitle.errors?.required" class="invalid-feedback">
+            Task Title Required
+          </div>
+          <div [hidden]="!taskTitle.errors?.minlength" class="invalid-feedback">
+            Must be at least 2 characters
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Is Complete</label>
+          <input type="checkbox" [(ngModel)]="isDone" name="isDone" [checked]="isDone" (change)="isDone = !isDone">
+        </div>
+  
+        <input type="submit" value="submit" class="btn btn-primary btn-block">
+      </form>
+    </div>
+  </div>
